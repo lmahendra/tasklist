@@ -91,6 +91,7 @@ Add TODO List</button>
       form = $(this).parents(".row").find("form")
       if(form.find("#task_name").val() == ""){
         alert("Please provide name");
+        return false;
       }
       else{
         form.submit();
