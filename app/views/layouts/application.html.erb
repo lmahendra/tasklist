@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tasklist</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag "jquery.min" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+</head>
+
+<style type="text/css">
+  body {
+		font-family: 'Open Sans', sans-serif;
+	}
+	.table-wrapper {
+		width: 700px;
+		margin: 30px auto;
+        background: #fff;
+        padding: 20px;	
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+    .table-title {
+        padding-bottom: 10px;
+        margin: 0 0 10px;
+    }
+    .table-title h2 {
+        margin: 6px 0 0;
+        font-size: 22px;
+    }
+    .table-title .add-new {
+        float: right;
+		height: 30px;
+		font-weight: bold;
+		font-size: 12px;
+		text-shadow: none;
+		min-width: 100px;
+		border-radius: 50px;
+		line-height: 13px;
+    }
+	.table-title .add-new i {
+		margin-right: 4px;
+	}
+    table.table {
+        table-layout: fixed;
+    }
+    table.table tr th, table.table tr td {
+        border-color: #e9e9e9;
+    }
+    table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    table.table th:last-child {
+        width: 100px;
+    }
+    table.table td a {
+		cursor: pointer;
+        display: inline-block;
+        margin: 0 5px;
+		min-width: 24px;
+    }    
+	table.table td a.add {
+        color: #27C46B;
+    }
+    table.table td a.edit {
+        color: #FFC107;
+    }
+    table.table td a.delete {
+        color: #E34724;
+    }
+    table.table td i {
+        font-size: 19px;
+    }
+	table.table td a.add i {
+        font-size: 24px;
+    	margin-right: -1px;
+        position: relative;
+        top: 3px;
+    }    
+    table.table .form-control {
+        height: 32px;
+        line-height: 32px;
+        box-shadow: none;
+        border-radius: 2px;
+    }
+	table.table .form-control.error {
+		border-color: #f50000;
+	}
+	table.table td .add {
+		display: none;
+	}
+	.wrapper {
+		width: 100%;
+		border: 2px solid #1f76b1;
+		border-bottom-right-radius: 25px;
+		margin: 10px;
+		border-bottom-left-radius: 25px;
+	}
+	.rbg {
+		margin-left: 0px;
+		margin-right: 0px;
+		background-color: #1f76b1;
+	}
+  .modal-body {
+    margin-left: 20px;
+  }
+  .modal-footer {
+    text-align: left;
+  }
+</style>
+</head>
+<script type="text/javascript">
+
+  var api = {
+    <% if @user.present? %>
+    token: "<%= @user.api_key %>"
+    <% end %>
+  }
+</script>
+<body>
+  <div id="page-wrapper">
+  	<% if current_user.present? %>
+  	<div class="nav-header"><span class="">  <%= current_user.full_name  %> </span> 
+    <%= link_to '', destroy_user_session_path, method: :delete, :class => "glyphicon glyphicon-log-out" %> </div>
+    <% end %>
+  </div>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>
